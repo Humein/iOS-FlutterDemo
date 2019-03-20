@@ -4,6 +4,7 @@ import 'package:flutter_module/SimpleScreen.dart';
 import 'package:flutter_module/Repository.dart';
 import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 import 'package:flutter_module/whatsapp_home.dart';
+import 'package:flutter_module/MovieCellDetail.dart';
 
 void main() {
 
@@ -42,6 +43,13 @@ class _ListViewState extends State<ListViewApp> {
           new MaterialPageRoute(
             builder: (BuildContext context) => new whatsapp_home(),
           ));
+    } if (ndx == 0){
+      Navigator.push(
+          context,
+          new MaterialPageRoute(
+            builder: (BuildContext context) => new MovieCellDetail(),
+          ));
+
     } else {
       Navigator.push(
           context,
