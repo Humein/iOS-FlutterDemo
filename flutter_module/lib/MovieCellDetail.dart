@@ -6,13 +6,84 @@ class MovieCellDetail extends StatefulWidget{
 
   State<StatefulWidget> createState() {
     // TODO: implement createState
+
     return MovieCardState();
   }
 }
 
 /** 整体样式 */
+/** 初始化list数据 */
+
+//列表要显示的数据
+List list = new List();
+//是否正在加载 刷新
+bool isfresh = false;
+//这个方法只会调用一次，在这个Widget被创建之后，必须调用super.initState()
 
 class MovieCardState extends State<MovieCellDetail>{
+
+
+
+
+  @override
+  void initState(){
+    super.initState();
+    //初始化数据
+    initData();
+  }
+
+  //延迟3秒后刷新
+  Future initData() async{
+    await Future.delayed(Duration(seconds: 3),(){
+      setState(() {
+        //用生成器给所有元素赋初始值
+        list = List.generate(20, (i){
+          return i;
+        });
+      });
+    });
+  }   //ListView Item
+
+
+
+  Widget _itemColumn(BuildContext context,int index){
+    if(index <list.length){
+      return Column(
+        children: <Widget>[
+          LayoutThreeColumn,
+        ],
+      );
+
+    }
+
+  }
+
+
+
+
+  //下拉刷新方法
+  Future<Null> _onRefresh() async {
+    //写逻辑 延迟3秒后执行刷新
+    //刷新把isfresh改为true
+    print('fresh====' + isfresh.toString());
+    isfresh = true;
+    print('fresh====' + isfresh.toString());
+    await Future.delayed(Duration(seconds: 3),(){
+      setState(() {
+        //数据清空再重新添加8条数据
+        list.clear();
+        list.addAll(List.generate(1, (i){
+          return i;
+        }));
+      });
+    });
+  }
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,34 +94,30 @@ class MovieCardState extends State<MovieCellDetail>{
         backgroundColor: Colors.deepOrange,
       ),
 
-//
-//      body: Card(
-//        child: Container(
-//          height: 200,
-//          color: Colors.amber,
-//          padding: EdgeInsets.all(20.0),
-//          child: Center(
-//            child: LayoutThreeColumn,
-//          ),
-//        ),
-//      ),
+
+
+
+
+      body: RefreshIndicator(
         //ListView提供一个builder属性
-        body: ListView.builder(
+        child: ListView.builder(
           //数目
-            itemCount: 20,
+            itemCount: list.length,
             //itemBuilder是一个匿名回调函数，有两个参数，BuildContext 和迭代器index
             //和ListView的Item项类似 迭代器从0开始 每调用一次这个函数，迭代器就会加1
-            itemBuilder: (BuildContext context,int index){
-              return Column(
-                children: <Widget>[
-                  LayoutThreeColumn,
-                ],
-              );
+            itemBuilder: _itemColumn,
+//            itemBuilder: (BuildContext context,int index){
+//              return Column(
+//                children: <Widget>[
+//                  LayoutThreeColumn,
+//                ],
+//              );
+//            }
 
-            }),
-
-
+        ),
+        onRefresh: _onRefresh,),
     );
+
 
   }
 
@@ -96,7 +163,7 @@ Widget LayoutThreeOne = Row(
         )
     ),
     //收藏图标
-    getPaddingfromLTRB(Icon(Icons.favorite,color:Colors.red),r:10.0),
+    getPaddingfromLTRB(Icon(Icons.favorite,color: isfresh ? Colors.red :  Colors.grey),r:10.0),
     //分享图标
     Icon(Icons.share,color:Colors.black),
   ],
@@ -122,6 +189,8 @@ Widget LayoutThreeThree = Row(
 
 
 /** 私有方法*/
+
+
 
 
 //右下角圆形
