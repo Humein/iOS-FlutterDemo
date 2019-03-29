@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_module/AddScreen.dart';
-import 'package:flutter_module/SimpleScreen.dart';
+//import 'package:flutter_module/SimpleScreen.dart';
 import 'package:flutter_module/Repository.dart';
 import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 import 'package:flutter_module/whatsapp_home.dart';
@@ -51,12 +51,12 @@ class _ListViewState extends State<ListViewApp> {
           ));
 
     } else {
-      Navigator.push(
-          context,
-          new MaterialPageRoute(
-            builder: (BuildContext context) =>
-            new SimpleScreen(Repo.items[ndx]),
-          ));
+//      Navigator.push(
+//          context,
+//          new MaterialPageRoute(
+//            builder: (BuildContext context) =>
+//            new SimpleScreen(Repo.items[ndx]),
+//          ));
     }
   }
 

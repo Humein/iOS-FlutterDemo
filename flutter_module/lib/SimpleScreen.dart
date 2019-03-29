@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_module/item_model.dart';
+//import 'package:flutter/material.dart';
+//import 'package:flutter_module/item_model.dart';
 
 // This screen displays the item name when
 // and item is tapped in the list
