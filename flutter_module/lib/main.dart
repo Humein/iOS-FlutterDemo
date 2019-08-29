@@ -5,7 +5,7 @@ import 'package:flutter_module/Repository.dart';
 import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 import 'package:flutter_module/whatsapp_home.dart';
 import 'package:flutter_module/MovieCellDetail.dart';
-
+import 'package:flutter_module/Authentications_page.dart';
 void main() {
 
   debugPaintSizeEnabled = false;
@@ -51,6 +51,11 @@ class _ListViewState extends State<ListViewApp> {
           ));
 
     } else {
+      Navigator.push(
+          context,
+          new MaterialPageRoute(
+            builder: (BuildContext context) => new Authentications_page(),
+          ));
 //      Navigator.push(
 //          context,
 //          new MaterialPageRoute(
